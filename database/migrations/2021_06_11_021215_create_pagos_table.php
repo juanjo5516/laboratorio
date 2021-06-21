@@ -18,7 +18,7 @@ class CreatePagosTable extends Migration
             $table->string('beneficiario');
             $table->decimal('monto', 10, 2);
             $table->foreignId('compra_id')->constrained();
-            $table->foreignId('cuenta_id')->constrained();
+            $table->foreignId('cuenta_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

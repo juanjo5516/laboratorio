@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MaterialStoreRequest extends FormRequest
+class ProductoStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class MaterialStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo' => 'required',
+            'codigo' => 'required|unique:productos,codigo',
             'nombre' => 'required',
             'descripcion' => 'required',
             'stock_minimo_viable' => 'required',
@@ -39,6 +39,7 @@ class MaterialStoreRequest extends FormRequest
     public function attributes()
     {
         return [
+            'codigo' => 'código',
             'stock_minimo_viable' => 'stock minimo viable',
             'unidad_id' => 'unidad de medida',
             'categoria_id' => 'categoria',

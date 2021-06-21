@@ -4,50 +4,71 @@
             <div class="container-fluid">
                 <div class="row mb2">
                     <div class="col-12">
-                        <h1>Detalle de proveedor</h1>
+                        <h1>Detalle de la compra</h1>
                     </div>
                 </div>
             </div>
         </div>
         <div class="content">
             <div class="container-fluid">
+                <i class="fas fa-arrow-left fa-lg mb-3" role="button" title="Regresar" v-on:click="$router.go(-1)"></i>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="card card-primary">
+                            <div class="card-body box-profile">
+                                <h3 class="profile-username text-center">
+                                    {{ compra.proveedor }}
+                                </h3>
+                                <p class="text-muted text-center">
+                                    Compra <span class="text-lowercase">{{ compra.forma_pago }}</span>
+                                    <br>
+                                    {{ compra.created_at }}
+                                </p>
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>ID</b>
+                                        <a class="float-right">
+                                            {{ compra.id }}
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Factura</b>
+                                        <a class="float-right">
+                                            {{ compra.factura }}
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Total</b>
+                                        <a class="float-right">
+                                            {{ compra.total }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
                         <div class="card">
                             <div class="card-body">
-                                <i class="fas fa-arrow-left fa-lg mb-3" role="button" title="Regresar" v-on:click="$router.go(-1)"></i>
-                                <form class="form-horizontal">
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2">Nit</label>
-                                        <div class="col-sm-10">
-                                            {{ proveedor.nit }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2">Nombre</label>
-                                        <div class="col-sm-10">
-                                            {{ proveedor.nombre }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2">Dirección</label>
-                                        <div class="col-sm-10">
-                                            {{ proveedor.direccion }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2">Teléfono</label>
-                                        <div class="col-sm-10">
-                                            {{ proveedor.telefono }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2">Email</label>
-                                        <div class="col-sm-10">
-                                            {{ proveedor.email }}
-                                        </div>
-                                    </div>
-                                </form>
+                                <h4>Productos</h4>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Precio unitario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="producto in productos">
+                                            <th scope="row">{{ producto.id }}</th>
+                                            <td>{{ producto.nombre }}</td>
+                                            <td>{{ producto.pivot.cantidad }}</td>
+                                            <td>{{ producto.pivot.precio }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -61,12 +82,20 @@
     export default {
         data() {
             return {
-                proveedor: {}
+                compra: {},
+                productos: []
             }
         },
         mounted() {
-            axios.get('/api/proveedores/' + this.$route.params.id)
-            .then(response => this.proveedor = response.data)
+            Promise.all([
+                axios.get('/api/compras/' + this.$route.params.id),
+                axios.get(`/api/compras/${this.$route.params.id}/productos`)
+                ])
+            
+            .then(response => {
+                this.compra = response[0].data
+                this.productos = response[1].data
+            })
             .catch(error => {
                 console.log(error.response)
             })

@@ -48,6 +48,9 @@
                                         </div>
                                     </div>
                                 </form>
+                                <router-link :to="{ name: 'proveedores.edit', params: { id: proveedor.id } }">
+                                    Modificar
+                                </router-link>
                             </div>
                         </div>
                     </div>

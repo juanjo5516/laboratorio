@@ -15,7 +15,8 @@ class Cxc extends Model
         'plazo',
         'fecha_pago',
         'compra_id',
-        'estado_id'
+        'estado_id',
+        'mes'
     ];
 
     public function estado()

@@ -13,7 +13,8 @@ class Compra extends Model
         'factura',
         'total',
         'proveedor_id',
-        'forma_pago_id'
+        'forma_pago_id',
+        'mes'
     ];
 
     public function proveedor()
@@ -31,8 +32,8 @@ class Compra extends Model
         return $this->hasMany(Pago::class);
     }
 
-    public function materiales()
+    public function productos()
     {
-        return $this->belongsToMany(Material::class);
+        return $this->belongsToMany(Producto::class)->withPivot('cantidad', 'precio');
     }
 }

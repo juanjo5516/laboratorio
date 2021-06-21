@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProveedorStoreRequest;
+use App\Models\Proveedor;
 
 class ProveedorController extends Controller
 {
     public function index(Request $request)
     {
-        return response()->json(Proveedor::orderBy('id', 'DESC')->get(), 200);
+        return response()->json(Proveedor::get(), 200);
     }
 
     public function store(ProveedorStoreRequest $request)

@@ -24,11 +24,11 @@ class ProveedorStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'nit' => 'required',
+            'nit' => 'required|unique:proveedores,nit',
             'nombre' => 'required',
             'direccion' => 'required',
-            'telefono' => 'required',
-            'email' => 'required'
+            'telefono' => 'required|regex:/^\d{8,8}$/i',
+            'email' => 'required|email'
         ];
     }
 
@@ -38,6 +38,14 @@ class ProveedorStoreRequest extends FormRequest
             'direccion' => 'dirección',
             'telefono' => 'teléfono',
             'email' => 'correo electrónico'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nit.unique' => 'El :attribute :input ya está registrado en la base de datos',
+            'telefono.regex' => 'El formato del campo :attribute es 12345678'
         ];
     }
 }

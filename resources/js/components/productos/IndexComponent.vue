@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb2">
                     <div class="col-12">
-                        <h1>Materiales</h1>
+                        <h1>Productos</h1>
                     </div>
                 </div>
             </div>
@@ -15,36 +15,36 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <router-link class="btn btn-primary" :to="{ name: 'materiales.create' }">Agregar</router-link>
+                                <router-link class="btn btn-primary" :to="{ name: 'productos.create' }">Agregar</router-link>
                             </div>
                             <div class="card-body table-responsive">
-                                <table class="table table-hover" v-if="materiales.length > 0">
+                                <table class="table table-hover" v-if="productos.length > 0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Código</th>
-                                            <th>Nombre</th>
-                                            <th>Decripción</th>
-                                            <th>Stock mínimo</th>
-                                            <th>Existencia</th>
-                                            <th>Precio</th>
-                                            <th>Acciones</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Código</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Decripción</th>
+                                            <th scope="col">Stock mínimo</th>
+                                            <th scope="col">Existencia</th>
+                                            <th scope="col">Costo</th>
+                                            <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="material in materiales">
-                                            <td>{{ material.id }}</td>
-                                            <td>{{ material.codigo }}</td>
-                                            <td>{{ material.nombre }}</td>
-                                            <td>{{ material.descripcion }}</td>
-                                            <td>{{ material.stock_minimo_viable }}</td>
-                                            <td>{{ material.existencia }}</td>
-                                            <td>{{ material.precio }}</td>
+                                        <tr v-for="producto in productos">
+                                            <th scope="row">{{ producto.id }}</th>
+                                            <td>{{ producto.codigo }}</td>
+                                            <td>{{ producto.nombre }}</td>
+                                            <td>{{ producto.descripcion }}</td>
+                                            <td>{{ producto.stock_minimo_viable }}</td>
+                                            <td>{{ producto.existencia }}</td>
+                                            <td>{{ producto.precio }}</td>
                                             <td>
-                                                <router-link :to="{ name: 'materiales.show', params: { id: material.id } }">
+                                                <router-link :to="{ name: 'productos.show', params: { id: producto.id } }">
                                                     Detalle
                                                 </router-link>
-                                                <router-link :to="{ name: 'materiales.edit', params: { id: material.id } }">
+                                                <router-link :to="{ name: 'productos.edit', params: { id: producto.id } }">
                                                     Modificar
                                                 </router-link>
                                             </td>
@@ -53,7 +53,7 @@
                                 </table>
                                 <blockquote class="quote-primary m-0" v-else>
                                     <h4>No hay registros</h4>
-                                    Ningún material ha sido registrado
+                                    Ningún producto ha sido registrado
                                 </blockquote>
                             </div>
                         </div>
@@ -72,13 +72,13 @@
     export default {
         data() {
             return {
-                materiales: []
+                productos: []
             }
         },
         mounted() {
-            axios.get('/api/materiales')
+            axios.get('/api/productos')
             .then(response => {
-                this.materiales = response.data
+                this.productos = response.data
             })
             .catch(error => {
                 console.log(error.response)

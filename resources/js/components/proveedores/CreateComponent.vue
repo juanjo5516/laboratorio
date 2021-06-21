@@ -12,11 +12,11 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-6 col-offset-3">
+                    <div class="col-6">
                         <div class="card">
                             <div class="card-body p-5">
                                 <i class="fas fa-arrow-left fa-lg mb-3" role="button" title="Regresar" v-on:click="$router.go(-1)"></i>
-                                <form autocomplete="off" enctype="multipart/form-data" id="formulario" v-on:submit.prevent="submit">
+                                <form autocomplete="off" id="formulario" v-on:submit.prevent="submit">
                                     <div class="form-group">
                                         <label for="nit">Nit</label>
                                         <input autofocus class="form-control" id="nit" name="nit" type="text" v-model="proveedor.nit" v-validate="'required'">
@@ -52,6 +52,16 @@
                                             {{ errors.first('email') }}
                                         </div>
                                     </div>
+                                    <blockquote class="quote-danger ml-0" v-show="errors_server.length > 0">
+                                        <h4>
+                                            El formulario tiene los siguientes errores
+                                        </h4>
+                                        <ul>
+                                            <li v-for="error in errors_server">
+                                                {{ error }}
+                                            </li>
+                                        </ul>
+                                    </blockquote>
                                     <button class="btn btn-primary btn-block" type="submit">
                                         Registrar
                                     </button>
@@ -84,7 +94,8 @@
     export default {
         data() {
             return {
-                proveedor: {}
+                proveedor: {},
+                errors_server: []
             }
         },
         methods: {
@@ -97,7 +108,14 @@
                             this.proveedor = {}
                         })
                         .catch(error => {
-                            console.log(error.response)
+                            if (typeof error.response.data === 'object') {
+                                this.errors_server = _.flatten(_.toArray(error.response.data.errors));
+                            } else {
+                                this.errors_server = [
+                                error.response.data.message ? error.response.data.message :
+                                error.response.data
+                                ];
+                            }
                         })
                     }
                 })

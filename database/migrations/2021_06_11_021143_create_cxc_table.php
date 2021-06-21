@@ -17,8 +17,8 @@ class CreateCxcTable extends Migration
             $table->id();
             $table->integer('plazo');
             $table->date('fecha_pago');
-            $table->date('compra_id')->constrained();
-            $table->date('estado_id')->constrained();
+            $table->foreignId('compra_id')->constrained();
+            $table->foreignId('estado_id')->constrained();
             $table->timestamps();
         });
     }

@@ -13,7 +13,8 @@ class Pago extends Model
         'beneficiario',
         'monto',
         'compra_id',
-        'cuenta_id'
+        'cuenta_id',
+        'mes'
     ];
 
     public function compra()

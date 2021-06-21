@@ -71,61 +71,12 @@
                 <p>{{ __('Dashboard') }}</p>
               </router-link>
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'catalogos.index'} ">
-                <i class="nav-icon fas fa-list-alt"></i>
-                <p>Catálogos</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'materiales.index'} ">
-                <i class="nav-icon fas fa-list-alt"></i>
-                <p>Materiales</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'proveedores.index'} ">
-                <i class="nav-icon fas fa-users"></i>
-                <p>Proveedores</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'compras.index'} ">
-                <i class="nav-icon fas fa-store-alt"></i>
-                <p>Compras</p>
-              </router-link>
-            </li>
-            {{--
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-building"></i>
-                <p>
-                  Otro módulo
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <i class="fas fa-search nav-icon"></i>
-                    <p>Búsqueda</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <i class="fas fa-user-check nav-icon"></i>
-                    <p>Habilitar contratista</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Nuevo contratista</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            --}}
+            @if($user->role_id == 1)
+            @include('layouts.menus.administrador')
+            @include('layouts.menus.operador')
+            @else
+            @include('layouts.menus.operador')
+            @endif
           </ul>
         </nav>
       </div>

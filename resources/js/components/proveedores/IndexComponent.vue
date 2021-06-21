@@ -21,18 +21,18 @@
                                 <table class="table table-hover" v-if="proveedores.length > 0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Nit</th>
-                                            <th>Nombre</th>
-                                            <th>Dirección</th>
-                                            <th>Teléfono</th>
-                                            <th>Email</th>
-                                            <th>Acciones</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nit</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Dirección</th>
+                                            <th scope="col">Teléfono</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="material in proveedores">
-                                            <td>{{ material.id }}</td>
+                                            <th scope="row">{{ material.id }}</th>
                                             <td>{{ material.nit }}</td>
                                             <td>{{ material.nombre }}</td>
                                             <td>{{ material.direccion }}</td>

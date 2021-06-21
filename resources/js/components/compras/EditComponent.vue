@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb2">
                     <div class="col-12">
-                        <h1 class="text-center">Crear proveedor</h1>
+                        <h1 class="text-center">Modificar compra</h1>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     if(isValid) {
                         axios.put('/api/proveedores/' + this.$route.params.id, this.proveedor)
                         .then(response => {
-                            Swal.fire('Actualización exitosa', 'El proveedor fue guardado en la base de datos', 'success')
+                            Swal.fire('Actualización exitosa', 'La compra fue actualizada en la base de datos', 'success')
                         })
                         .catch(error => {
                             console.log(error.response)

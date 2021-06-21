@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb2">
                     <div class="col-12">
-                        <h1>Proveedores</h1>
+                        <h1>Compras</h1>
                     </div>
                 </div>
             </div>
@@ -21,29 +21,26 @@
                                 <table class="table table-hover" v-if="compras.length > 0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Nit</th>
-                                            <th>Nombre</th>
-                                            <th>Dirección</th>
-                                            <th>Teléfono</th>
-                                            <th>Email</th>
-                                            <th>Acciones</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Proveedor</th>
+                                            <th scope="col">Factura</th>
+                                            <th scope="col">Fecha factura</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Forma de pago</th>
+                                            <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="material in compras">
-                                            <td>{{ material.id }}</td>
-                                            <td>{{ material.nit }}</td>
-                                            <td>{{ material.nombre }}</td>
-                                            <td>{{ material.direccion }}</td>
-                                            <td>{{ material.telefono }}</td>
-                                            <td>{{ material.email }}</td>
+                                            <th scope="row">{{ material.id }}</th>
+                                            <td>{{ material.proveedor }}</td>
+                                            <td>{{ material.factura }}</td>
+                                            <td>{{ material.created_at }}</td>
+                                            <td>{{ Intl.NumberFormat("es-GT", { style: "currency", currency: "GTQ" }).format(material.total) }}</td>
+                                            <td>{{ material.forma_pago }}</td>
                                             <td>
                                                 <router-link :to="{ name: 'compras.show', params: { id: material.id } }">
                                                     Detalle
-                                                </router-link>
-                                                <router-link :to="{ name: 'compras.edit', params: { id: material.id } }">
-                                                    Modificar
                                                 </router-link>
                                             </td>
                                         </tr>

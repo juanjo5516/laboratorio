@@ -5,16 +5,15 @@ namespace App\Models;
 // use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompraMaterial extends Model
+class PresupuestoDetalle extends Model
 {
     // use HasFactory;
 
-    protected $table = 'compras_materiales';
+    protected $table = 'presupuesto_detalle';
 
     protected $fillable = [
-        'cantidad',
-        'precio',
-        'compra_id',
-        'material_id'
+        'mes',
+        'monto',
+        'presupuesto_id'
     ];
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComprasMaterialesTable extends Migration
+class CreateCompraProductoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateComprasMaterialesTable extends Migration
      */
     public function up()
     {
-        Schema::create('compras_materiales', function (Blueprint $table) {
+        Schema::create('compra_producto', function (Blueprint $table) {
             $table->id();
             $table->integer('cantidad');
             $table->decimal('precio', 10, 2);
             $table->foreignId('compra_id')->constrained();
-            $table->foreignId('material_id')->constrained('materiales');
+            $table->foreignId('producto_id')->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateComprasMaterialesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras_materiales');
+        Schema::dropIfExists('compras_producto');
     }
 }

@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb2">
                     <div class="col-12">
-                        <h1 class="text-center">Crear proveedor</h1>
+                        <h1 class="text-center">Modificar proveedor</h1>
                     </div>
                 </div>
             </div>
@@ -12,7 +12,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-6 col-offset-3">
+                    <div class="col-6">
                         <div class="card">
                             <div class="card-body p-5">
                                 <i class="fas fa-arrow-left fa-lg mb-3" role="button" title="Regresar" v-on:click="$router.go(-1)"></i>
@@ -102,7 +102,7 @@
                     if(isValid) {
                         axios.put('/api/proveedores/' + this.$route.params.id, this.proveedor)
                         .then(response => {
-                            Swal.fire('Actualización exitosa', 'El proveedor fue guardado en la base de datos', 'success')
+                            Swal.fire('Actualización exitosa', 'El proveedor fue actualizado en la base de datos', 'success')
                         })
                         .catch(error => {
                             console.log(error.response)

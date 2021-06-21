@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Material;
+use App\Models\Producto;
 use Illuminate\Http\Request;
-use App\Http\Requests\MaterialStoreRequest;
+use App\Http\Requests\ProductoStoreRequest;
 
-class MaterialController extends Controller
+class ProductoController extends Controller
 {
     public function index(Request $request)
     {
-        return response()->json(Material::orderBy('id', 'DESC')->get(), 200);
+        return response()->json(Producto::get(), 200);
     }
 
-    public function store(MaterialStoreRequest $request)
+    public function store(ProductoStoreRequest $request)
     {
-        $path_foto = $request->foto->store('materiales', 'public');
+        $path_foto = $request->foto->store('productos', 'public');
 
-        $material = Material::create([
+        $material = Producto::create([
             'codigo' => $request->codigo,
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
@@ -35,16 +35,16 @@ class MaterialController extends Controller
 
     public function show($id)
     {
-        return response()->json(Material::findOrFail($id), 200);
+        return response()->json(Producto::findOrFail($id), 200);
     }
 
     public function update(Request $request, $id)
     {
-        $material = Material::findOrFail($id);
+        $material = Producto::findOrFail($id);
 
+        $path_foto = $material->foto;
         if( $request->hasFile('foto') ) {
-            global $path_foto;
-            $path_foto = $request->foto->store('materiales', 'public');
+            $path_foto = $request->foto->store('productos', 'public');
         }
 
         $foto_anterior = $material->foto;
@@ -70,7 +70,7 @@ class MaterialController extends Controller
 
     public function destroy($id)
     {
-        Material::where('id', $id)->delete();
+        Producto::where('id', $id)->delete();
         return response()->json('Deleted', 204);
     }
 }
